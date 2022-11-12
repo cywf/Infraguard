@@ -6,13 +6,20 @@ Simple sccript to use a server as a proxy - USER/PASS
 #!/bin/bash
 # <UDF name="username" Label="Proxy Username" />
 # <UDF name="password" Label="Proxy Username" />
+
 apt-get update
+
 sleep 15
+
 clear
+
 apt-get install squid -y
 apt-get install apache2-utils -y
+
 rm -rf /etc/squid/squid.conf
+
 touch /etc/squid/squid.conf
+
 echo -e "
 forwarded_for off
 visible_hostname squid.server.commm
@@ -51,9 +58,13 @@ request_header_access Proxy-Connection allow all
 request_header_access User-Agent allow all
 request_header_access Cookie allow all
 request_header_access All deny all" >> /etc/squid/squid.conf
+
 htpasswd -b -c /etc/squid/squid_passwd $USERNAME $PASSWORD
+
 service squid restart
+
 clear
+
 change
 htpasswd -b -c /etc/squid/squid_passwd $USERNAME $PASSWORD
 ```
