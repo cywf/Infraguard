@@ -64,4 +64,4 @@ Run the script without parameters to see the help
 
 ### Code: ZeroTier Shell Script
 
-Find it [here](https://github.com/cywf/Infraguard/zerotier/zerotier.sh)
+Find it [here](https://github.com/cywf/Infraguard/blob/main/zerotier/zerotier.sh)
