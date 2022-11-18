@@ -5,7 +5,7 @@ Name=$BR_IF
 [Network]
 Address=$BR_ADDR
 Gateway=$GW_ADDR
-DNS=1.1.1.1
+DNS=9.9.9.9
 EOF
 
 cat << EOF | sudo tee /etc/systemd/network/br0.netdev
