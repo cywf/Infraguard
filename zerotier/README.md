@@ -1,6 +1,6 @@
 # ZeroTier Scripts
 
-See also [these-terraform-scripts](https://githuv.com/cywf/Infraguard/terraform/README.md) to deploy ZeroTier at scale 
+[//]:'See-also-[these-terraform-scripts](https://githuv.com/cywf/Infraguard/terraform/README.md)-to-deploy-ZeroTier-at-scale'
 
 ---
 
