@@ -1,0 +1,35 @@
+#cloud-config
+
+# add each entry to ~/.ssh/authorized_keys for the configured user or the
+# first user defined in the user definition directive.
+ssh_authorized_keys:
+  -
+
+# Send pre-generated SSH private keys to the server
+# If these are present, they will be written to /etc/ssh and
+# new random keys will not be generated
+#  in addition to 'rsa' and 'dsa' as shown below, 'ecdsa' is also supported
+ssh_keys:
+  rsa_private: |
+    -----BEGIN RSA PRIVATE KEY-----
+
+    -----END RSA PRIVATE KEY-----
+
+  rsa_public: ssh-rsa
+
+  dsa_private: |
+    -----BEGIN DSA PRIVATE KEY-----
+
+    -----END DSA PRIVATE KEY-----
+
+  dsa_public: ssh-dss
+
+# By default, the fingerprints of the authorized keys for the users
+# cloud-init adds are printed to the console. Setting
+# no_ssh_fingerprints to true suppresses this output.
+no_ssh_fingerprints: false
+
+# By default, (most) ssh host keys are printed to the console. Setting
+# emit_keys_to_console to false suppresses this output.
+ssh:
+  emit_keys_to_console: false
