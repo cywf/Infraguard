@@ -37,7 +37,7 @@ and either retrieve it, or destroy it.
 * War Philosophy ([The-Art-of-War](https://github.com/GITenberg/The-Art-of-War_132/blob/master/132.txt))
 * Tactical, Tracking, Tequniques ([hunter.io](https://hunter.io/), [Shodan](https://www.shodan.io/), [WeLeakInfo](https://weleakinfo.com/register))
 * Deep Forensics ([AttackSurfaceMapper](https://github.com/nerodtm/AttackSurfaceMapper), [awesome-forensics](https://github.com/alphaSeclab/awesome-forensics))
-* BlackHat Networking ([bass]([bass](https://github.com/Abss0x7tbh/bass))))
+* BlackHat Networking ([bass](https://github.com/Abss0x7tbh/bass))
 * DarkWeb Activity ([darknetrecon](https://darknetrecon.com/))
 * Anti Forensics ([anti-forensics](https://github.com/int0x80/anti-forensics), [usbkill](https://github.com/hephaest0s/usbkill), [awesome-anti-forensics](https://github.com/shadawck/awesome-anti-forensic))
 * Active Reconnaissance ([SilentHound](https://github.com/layer8secure/SilentHound), [Scout](https://github.com/TheHairyJ/Scout), [Adalanche](https://github.com/lkarlslund/Adalanche))
