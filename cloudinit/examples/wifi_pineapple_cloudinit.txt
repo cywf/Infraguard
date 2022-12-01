@@ -1,0 +1,30 @@
+This file automatically configures the WiFi Pineapple.
+To enroll your WiFi Pineapple automatically, edit the below variables. Save as config.txt on the root of an ext4/exFAT/FAT/NTFS USB flash drive. Connect to the WiFi Pineapple USB host port before applying power for the first time. During firmware installation, the LED will flash Red/Blue. DO NOT DISCONNECT POWER DURING FIRMWARE INSTALLATION!
+For more information, visit https://docs.hak5.org
+
+-----------------------------
+[General System Configuration]
+
+ROOT_PASSWORD="hak5pineapple"
+HOSTNAME="pineapple"
+TIMEZONE="utc"
+
+-----------------------------
+[Wireless AP Configuration]
+
+MANAGEMENT_SSID="Pineapple_Management" 18 MANAGEMENT_PSK="AGoodWPA-PSKPassphrase" 19 MANAGEMENT_HIDDEN=1
+MANAGEMENT_DISABELD=0
+OPEN_SSID="Open"
+OPEN_HIDDEN=0
+COUNTRY_CODE=US
+Filters Configuration
+CLIENT_FILTER="ALLOW"
+SSID_FILTER="ALLOW"
+
+-----------------------------
+[Hak5 Cloud C2 Configuration]
+
+ENABLE_C2=1 33 #
+Software License Agreement:
+# https://hak5.org/pages/software-license-agreement
+ACCEPT_LICENSE=TRUE
