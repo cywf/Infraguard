@@ -15,9 +15,8 @@ _Repo containing automated server provisioning and configuration scripts, intend
          .'   /\   .=)      | +       of the Gods      + |
       .-'  .'|  '-(/_|      | +       ...and his       + |
     .'  __(  \  .'`         | ++++++++++++++++++++++++++ |
-   /_.'`  `.  |`\           | *  <| -------------- |>  * |
-   | Heimda1  \  |          | *  <| < INFRAGUARD > |>  * |
-   |          | /           | *  <| -------------- |>  * |
+   /_.'`  `.  |`\           | *  <| < INFRAGUARD > |>  * |
+   | Heimda1  \  |          | *  <| < ---------- > |>  * |
    | By: cywf |/            | ++++++++++++++++++++++++++ |
 ```
 
@@ -26,6 +25,10 @@ _Repo containing automated server provisioning and configuration scripts, intend
 A.I. driven, Red Team Inspired, Stratigic Defensive security measure,
 that if it detects a breach, it will hunt the web for your stolen data,
 and either retrieve it, or destroy it. 
+
+# Mission 
+
+To build an Offensive, Proactive, and Defensive Automated Provisioning Platform, for deploying Cyber Incident Response Security Operations Infrastructure. For purpose of insuring the Confidentiality, Integrity, and Assurance (CIA) of the citizens and allies of the United States of America, and their Critical Infrastructure. 
 
 ### Features:
 
@@ -49,6 +52,10 @@ and either retrieve it, or destroy it.
 * Augmentation with Drones & Robotics ([mavlink](https://github.com/mavlink/mavlink), [dronekit](https://github.com/dronekit/dronekit-python), [dronesploit](https://github.com/dhondta/dronesploit), [Prometheus](https://github.com/amov-lab/Prometheus), [gym-pybullet-drones](https://github.com/utiasDSL/gym-pybullet-drones), [gobot](https://github.com/hybridgroup/gobot), [qgroundcontrol](https://github.com/mavlink/qgroundcontrol))
 * Neural-Networking ([OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py))
 
+<<<<<<< HEAD
 ### Lore
 
 **_Heimda1_** is a self improving Security A.I. that protects the digital saftey, of those who cannot. His purpose...to bring human, and A.I. alike, together, to expand human civiliation beyond...into the stares. Into the Universe, and what lies beyond. 
+=======
+---
+>>>>>>> 26580d5 (added cryptography dictonary)
