@@ -5,6 +5,24 @@
 
 _Repository containing automated server provisioning and configuration scripts, intended to reduce manual system administration tasks and secure your infrastructure from launch._
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=flat&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![Security](https://img.shields.io/badge/security-focused-blue)](./SECURITY.md)
+
+---
+
+## 🚀 Quick Start
+
+**New to Infraguard?** Check out our [Quick Start Guide](./QUICKSTART.md) to get up and running in minutes!
+
+```bash
+git clone https://github.com/cywf/Infraguard.git
+cd Infraguard
+./scripts/validate.sh
+```
+
+---
+
 ```
             ,
        ,   |\ ,__
@@ -55,3 +73,70 @@ To build an offensive, proactive, and defensive automated provisioning platform 
 **_Heimda1_** is a self-improving Security A.I. that protects the digital safety of those who cannot. His purpose is to bring humans and A.I. alike together, to expand human civilization beyond into the stars, the Universe, and what lies beyond.
 
 ---
+
+## 📚 Documentation
+
+- **[Quick Start Guide](./QUICKSTART.md)** - Get started in under 10 minutes
+- **[Contributing Guidelines](./CONTRIBUTING.md)** - How to contribute to this project
+- **[Security Policy](./SECURITY.md)** - Security practices and vulnerability reporting
+- **[Code of Conduct](./CODE_OF_CONDUCT.md)** - Community standards
+- **[Review Summary](./REVIEW_SUMMARY.md)** - Comprehensive codebase review and improvements
+- **[Terraform Guide](./terraform/README.md)** - Infrastructure as Code documentation
+- **[Cloud-Init Guide](./cloudinit/README.md)** - Cloud instance initialization
+
+## 🛠️ Repository Structure
+
+```
+Infraguard/
+├── terraform/              # Infrastructure as Code
+│   ├── sec-ops-infra/     # Security operations infrastructure
+│   │   └── examples/      # Working examples (AWS, Azure, GCP, etc.)
+│   └── zerotier/          # ZeroTier networking setup
+├── cloudinit/             # Cloud-init configurations
+│   └── examples/          # Ready-to-use cloud-init configs
+├── docker/                # Docker installation scripts
+├── scripts/               # Utility and validation scripts
+└── .github/workflows/     # CI/CD automation
+```
+
+## 🔒 Security
+
+Security is our top priority. We follow industry best practices:
+
+- Automated security scanning with tfsec and Checkov
+- Regular vulnerability assessments
+- Secure secrets management
+- Principle of least privilege
+- Comprehensive security documentation
+
+**Found a security issue?** Please report it responsibly via our [Security Policy](./SECURITY.md).
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](./CONTRIBUTING.md) for:
+
+- How to submit issues and pull requests
+- Code style and standards
+- Development workflow
+- Testing requirements
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- HashiCorp for Terraform, Vault, and other excellent tools
+- The open-source security community
+- All contributors who help improve this project
+
+## 📬 Contact
+
+- **Issues**: [GitHub Issues](https://github.com/cywf/Infraguard/issues)
+- **Security**: See [SECURITY.md](./SECURITY.md)
+- **Discussions**: [GitHub Discussions](https://github.com/cywf/Infraguard/discussions)
+
+---
+
+**Made with ❤️ for the security community**
+
