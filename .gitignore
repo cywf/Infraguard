@@ -1,0 +1,73 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Cloud-init files with secrets
+*secrets*
+*password*
+*key*.pem
+*key*.pub
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Log files
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# SSH keys
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+# Backup files
+*.bak
+*.backup
+
+# OS generated files
+Thumbs.db
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Node modules (if any JavaScript tooling is added)
+node_modules/
+
+# Python files (if any Python scripts are added)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Ansible files
+*.retry
