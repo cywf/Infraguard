@@ -1,0 +1,31 @@
+name: Shell Script Linting
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - '**/*.sh'
+      - '.github/workflows/shellcheck.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - '**/*.sh'
+
+jobs:
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: '.'
+          severity: warning
+          ignore_paths: |
+            .git
+            .github
+        continue-on-error: true

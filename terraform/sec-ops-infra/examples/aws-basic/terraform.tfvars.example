@@ -1,0 +1,32 @@
+# Example terraform.tfvars file
+# Copy this file and customize for your deployment
+
+# AWS Region
+aws_region = "us-east-1"
+
+# Environment (development, staging, or production)
+environment = "development"
+
+# Project name for resource naming
+project_name = "my-secops"
+
+# VPC CIDR block
+vpc_cidr = "10.0.0.0/16"
+
+# Availability zones to use
+availability_zones = ["us-east-1a", "us-east-1b"]
+
+# Trusted CIDR blocks for SSH access
+# IMPORTANT: Replace with your actual IP ranges
+trusted_cidr_blocks = [
+  "10.0.0.0/8",      # Private network
+  # "YOUR.IP.ADDRESS/32"  # Your public IP
+]
+
+# Additional tags
+tags = {
+  ManagedBy   = "Terraform"
+  Project     = "Infraguard"
+  Owner       = "Security Team"
+  CostCenter  = "SecOps"
+}

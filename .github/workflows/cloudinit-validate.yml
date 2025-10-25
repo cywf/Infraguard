@@ -1,0 +1,36 @@
+name: Cloud-Init Validation
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'cloudinit/**/*.yaml'
+      - 'cloudinit/**/*.yml'
+      - '.github/workflows/cloudinit-validate.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'cloudinit/**/*.yaml'
+      - 'cloudinit/**/*.yml'
+
+jobs:
+  yaml-lint:
+    name: YAML Lint
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      - name: Install yamllint
+        run: pip install yamllint
+      
+      - name: Run yamllint
+        run: |
+          yamllint -d "{extends: default, rules: {line-length: {max: 120}, document-start: disable}}" cloudinit/examples/
+        continue-on-error: true

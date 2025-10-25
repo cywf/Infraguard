@@ -1,0 +1,65 @@
+name: Terraform Validation
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'terraform/**/*.tf'
+      - '.github/workflows/terraform-validate.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'terraform/**/*.tf'
+
+jobs:
+  validate:
+    name: Validate Terraform
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+      
+      - name: Terraform Format Check
+        run: |
+          echo "Checking Terraform formatting..."
+          terraform fmt -check -recursive terraform/
+        continue-on-error: true
+      
+      - name: Terraform Init and Validate - sec-ops-infra
+        run: |
+          cd terraform/sec-ops-infra
+          terraform init -backend=false
+          terraform validate
+      
+      - name: Terraform Init and Validate - zerotier
+        run: |
+          cd terraform/zerotier/terraform
+          terraform init -backend=false
+          terraform validate
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Run tfsec
+        uses: aquasecurity/tfsec-action@v1.0.0
+        with:
+          working_directory: terraform
+          soft_fail: true
+      
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: terraform
+          framework: terraform
+          soft_fail: true
