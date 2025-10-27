@@ -1,0 +1,76 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Infraguard Vagrant Configuration
+# Creates a hardened Ubuntu VM for development and testing
+
+Vagrant.configure("2") do |config|
+  # Base box
+  config.vm.box = "ubuntu/jammy64"
+  config.vm.hostname = "infraguard-dev"
+  
+  # Network configuration
+  config.vm.network "private_network", ip: "192.168.56.10"
+  
+  # Port forwarding
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 443, host: 8443
+  
+  # VM resource allocation
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "infraguard-dev"
+    vb.memory = "2048"
+    vb.cpus = 2
+  end
+  
+  # Shared folder
+  config.vm.synced_folder "../", "/infraguard"
+  
+  # Provisioning - System updates
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get upgrade -y
+  SHELL
+  
+  # Provisioning - Security packages
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get install -y fail2ban ufw aide unattended-upgrades
+  SHELL
+  
+  # Provisioning - Docker installation
+  config.vm.provision "shell", path: "../docker/docker_install.sh"
+  
+  # Provisioning - SSH hardening
+  config.vm.provision "shell", inline: <<-SHELL
+    sed -i 's/^#PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+    sed -i 's/^X11Forwarding.*/X11Forwarding no/' /etc/ssh/sshd_config
+    systemctl restart sshd
+  SHELL
+  
+  # Provisioning - Firewall configuration
+  config.vm.provision "shell", inline: <<-SHELL
+    ufw default deny incoming
+    ufw default allow outgoing
+    ufw allow ssh
+    ufw allow 80/tcp
+    ufw allow 443/tcp
+    echo "y" | ufw enable
+  SHELL
+  
+  # Provisioning - fail2ban
+  config.vm.provision "shell", inline: <<-SHELL
+    systemctl enable fail2ban
+    systemctl start fail2ban
+  SHELL
+  
+  # Display info message
+  config.vm.provision "shell", inline: <<-SHELL
+    echo "=========================================="
+    echo "Infraguard Development VM Ready!"
+    echo "=========================================="
+    echo "VM IP: 192.168.56.10"
+    echo "HTTP: http://localhost:8080"
+    echo "HTTPS: https://localhost:8443"
+    echo "=========================================="
+  SHELL
+end

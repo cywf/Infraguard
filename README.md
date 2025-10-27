@@ -34,11 +34,11 @@ To build an Offensive, Proactive, and Defensive Automated Provisioning Platform,
 
 * Hardening your Infrastructure  ([Terraform](https://github.com/hashicorp/terraform), [Vagrant](https://github.com/hashicorp/vagrant))
 * Advanced Networking ([OpenWRT](https://github.com/openwrt/openwrt), [ZeroTier](https://github.com/zerotier/ZeroTierOne))
-* Red Tead Techniques, Tactics, and Prosedures ([RedTeaming-Tactics-and-Techniques](https://github.com/mantvydasb/RedTeaming-Tactics-and-Techniques), [HiddenVM](https://github.com/aforensics/HiddenVM))
+* Red Team Techniques, Tactics, and Procedures ([RedTeaming-Tactics-and-Techniques](https://github.com/mantvydasb/RedTeaming-Tactics-and-Techniques), [HiddenVM](https://github.com/aforensics/HiddenVM))
 * Rootkits, Bootkits, and Backdoors ([canisrufus](https://github.com/maldevel/canisrufus))
 * Command & Control (,[python_and_the_web](https://github.com/Python-World/Python_and_the_Web))
 * War Philosophy ([The-Art-of-War](https://github.com/GITenberg/The-Art-of-War_132/blob/master/132.txt))
-* Tactical, Tracking, Tequniques ([hunter.io](https://hunter.io/), [Shodan](https://www.shodan.io/), [WeLeakInfo](https://weleakinfo.com/register))
+* Tactical Tracking Techniques ([hunter.io](https://hunter.io/), [Shodan](https://www.shodan.io/), [WeLeakInfo](https://weleakinfo.com/register))
 * Deep Forensics ([AttackSurfaceMapper](https://github.com/nerodtm/AttackSurfaceMapper), [awesome-forensics](https://github.com/alphaSeclab/awesome-forensics))
 * BlackHat Networking ([bass](https://github.com/Abss0x7tbh/bass))
 * DarkWeb Activity ([darknetrecon](https://darknetrecon.com/))
@@ -47,15 +47,13 @@ To build an Offensive, Proactive, and Defensive Automated Provisioning Platform,
 * Container Management ([Nomad](https://github.com/hashicorp/nomad),[Sysdig](https://github.com/draios/sysdig))
 * Secrets & Encryption ([Vault](https://github.com/hashicorp/vault))
 * Automation ([Packer](https://github.com/hashicorp/packer), [Ansible](https://github.com/ansible/ansible))
-* Inventory and Asset Managment ([InvenTree](https://github.com/inventree/InvenTree))
+* Inventory and Asset Management ([InvenTree](https://github.com/inventree/InvenTree))
 * Facial Recognition ([frigate](https://github.com/blakeblackshear/frigate), [pikvm](https://github.com/pikvm/pikvm), [face_recognition](https://github.com/ageitgey/face_recognition))
 * Augmentation with Drones & Robotics ([mavlink](https://github.com/mavlink/mavlink), [dronekit](https://github.com/dronekit/dronekit-python), [dronesploit](https://github.com/dhondta/dronesploit), [Prometheus](https://github.com/amov-lab/Prometheus), [gym-pybullet-drones](https://github.com/utiasDSL/gym-pybullet-drones), [gobot](https://github.com/hybridgroup/gobot), [qgroundcontrol](https://github.com/mavlink/qgroundcontrol))
 * Neural-Networking ([OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py))
 
-<<<<<<< HEAD
+---
+
 ### Lore
 
-**_Heimda1_** is a self improving Security A.I. that protects the digital saftey, of those who cannot. His purpose...to bring human, and A.I. alike, together, to expand human civiliation beyond...into the stares. Into the Universe, and what lies beyond. 
-=======
----
->>>>>>> 26580d5 (added cryptography dictonary)
+**_Heimda1_** is a self improving Security A.I. that protects the digital safety of those who cannot. His purpose...to bring human and A.I. alike together, to expand human civilization beyond...into the stars. Into the Universe, and what lies beyond.

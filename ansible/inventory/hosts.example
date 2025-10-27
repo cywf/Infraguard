@@ -1,0 +1,35 @@
+# Ansible Inventory Example
+# Copy this file to 'hosts' and configure with your server details
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[production]
+# prod-server-1 ansible_host=192.168.1.10 ansible_user=root
+# prod-server-2 ansible_host=192.168.1.11 ansible_user=root
+
+[staging]
+# stage-server-1 ansible_host=192.168.1.20 ansible_user=root
+
+[development]
+# dev-server-1 ansible_host=192.168.1.30 ansible_user=root
+
+[security_operations]
+# Security operations servers
+# sec-ops-1 ansible_host=192.168.2.10 ansible_user=admin
+
+[monitoring]
+# Monitoring and logging servers
+# monitor-1 ansible_host=192.168.2.20 ansible_user=admin
+
+[vault_servers]
+# HashiCorp Vault servers
+# vault-1 ansible_host=192.168.2.30 ansible_user=admin
+
+[docker_hosts]
+# Docker container hosts
+# docker-1 ansible_host=192.168.3.10 ansible_user=admin
+
+[zerotier_nodes]
+# ZeroTier VPN nodes
+# zt-node-1 ansible_host=192.168.4.10 ansible_user=admin

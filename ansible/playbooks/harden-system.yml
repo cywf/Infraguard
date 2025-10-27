@@ -1,0 +1,84 @@
+---
+# System Hardening Playbook
+# Applies security hardening measures to target systems
+
+- name: Harden Linux Systems
+  hosts: all
+  become: yes
+  
+  vars:
+    # SSH Configuration
+    ssh_port: 22
+    disable_root_login: yes
+    
+    # Firewall settings
+    allowed_tcp_ports: [22, 80, 443]
+    allowed_udp_ports: []
+    
+  tasks:
+    - name: Update all packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+      when: ansible_os_family == "Debian"
+      
+    - name: Install security packages
+      apt:
+        name:
+          - fail2ban
+          - ufw
+          - unattended-upgrades
+          - aide
+        state: present
+      when: ansible_os_family == "Debian"
+      
+    - name: Configure SSH hardening
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+      loop:
+        - { regexp: '^PermitRootLogin', line: 'PermitRootLogin no' }
+        - { regexp: '^PasswordAuthentication', line: 'PasswordAuthentication no' }
+        - { regexp: '^X11Forwarding', line: 'X11Forwarding no' }
+        - { regexp: '^MaxAuthTries', line: 'MaxAuthTries 3' }
+      notify: Restart SSH
+      
+    - name: Configure UFW firewall
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      loop: "{{ allowed_tcp_ports }}"
+      
+    - name: Enable UFW
+      ufw:
+        state: enabled
+        policy: deny
+        
+    - name: Configure fail2ban
+      service:
+        name: fail2ban
+        state: started
+        enabled: yes
+        
+    - name: Set kernel security parameters
+      sysctl:
+        name: "{{ item.name }}"
+        value: "{{ item.value }}"
+        state: present
+        reload: yes
+      loop:
+        - { name: 'net.ipv4.conf.all.rp_filter', value: '1' }
+        - { name: 'net.ipv4.conf.default.rp_filter', value: '1' }
+        - { name: 'net.ipv4.icmp_echo_ignore_broadcasts', value: '1' }
+        - { name: 'net.ipv4.conf.all.accept_source_route', value: '0' }
+        - { name: 'net.ipv4.conf.default.accept_source_route', value: '0' }
+        - { name: 'net.ipv4.tcp_syncookies', value: '1' }
+        
+  handlers:
+    - name: Restart SSH
+      service:
+        name: sshd
+        state: restarted
