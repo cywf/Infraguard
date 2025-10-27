@@ -54,6 +54,59 @@ To build an Offensive, Proactive, and Defensive Automated Provisioning Platform,
 
 ---
 
+## Getting Started
+
+📖 **[Read the Setup Guide](SETUP.md)** for detailed installation and usage instructions.
+
+### Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/cywf/Infraguard.git
+cd Infraguard
+
+# Install dependencies (Ubuntu/Debian)
+sudo apt update && sudo apt install -y ansible terraform
+
+# Configure your infrastructure
+cd terraform/sec-ops-infra
+terraform init
+terraform plan
+
+# Or use Ansible for server hardening
+cd ../../ansible
+cp inventory/hosts.example inventory/hosts
+# Edit inventory/hosts with your servers
+ansible-playbook -i inventory/hosts playbooks/harden-system.yml
+```
+
+### Repository Structure
+
+```
+Infraguard/
+├── ansible/          # Automation playbooks and roles
+├── terraform/        # Infrastructure as Code configurations
+├── packer/           # Image building templates
+├── vagrant/          # Local development VMs
+├── docker/           # Docker installation scripts
+├── nomad/            # Container orchestration configs
+├── vault/            # Secrets management setup
+├── cloudinit/        # Cloud-init configurations
+├── networking/       # Network configurations
+└── stacks/           # Application stacks
+```
+
+### Documentation
+
+- **[Setup Guide](SETUP.md)** - Installation and configuration
+- **[Contributing Guide](CONTRIBUTING.md)** - How to contribute
+- **[Ansible Documentation](ansible/README.md)** - Automation playbooks
+- **[Terraform Documentation](terraform/README.md)** - Infrastructure configs
+- **[Vault Documentation](vault/README.md)** - Secrets management
+- **[Nomad Documentation](nomad/README.md)** - Container orchestration
+
+---
+
 ### Lore
 
 **_Heimda1_** is a self improving Security A.I. that protects the digital safety of those who cannot. His purpose...to bring human and A.I. alike together, to expand human civilization beyond...into the stars. Into the Universe, and what lies beyond.

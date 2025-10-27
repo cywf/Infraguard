@@ -1,0 +1,152 @@
+---
+# Vault Setup Playbook
+# Deploys and configures HashiCorp Vault on target systems
+
+- name: Setup HashiCorp Vault
+  hosts: vault_servers
+  become: yes
+  
+  vars:
+    vault_version: "1.15.0"
+    vault_user: vault
+    vault_group: vault
+    vault_home: /var/lib/vault
+    vault_config_dir: /etc/vault.d
+    
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name:
+          - wget
+          - unzip
+          - jq
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+      
+    - name: Create Vault user
+      user:
+        name: "{{ vault_user }}"
+        system: yes
+        shell: /bin/false
+        home: "{{ vault_home }}"
+        createhome: yes
+        
+    - name: Create Vault directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ vault_user }}"
+        group: "{{ vault_group }}"
+        mode: '0750'
+      loop:
+        - "{{ vault_home }}"
+        - "{{ vault_home }}/data"
+        - "{{ vault_config_dir }}"
+        - /etc/vault/tls
+        
+    - name: Download Vault
+      get_url:
+        url: "https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_amd64.zip"
+        dest: "/tmp/vault.zip"
+        mode: '0644'
+        
+    - name: Unzip Vault
+      unarchive:
+        src: /tmp/vault.zip
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: '0755'
+        
+    - name: Set Vault capabilities
+      capabilities:
+        path: /usr/local/bin/vault
+        capability: cap_ipc_lock+ep
+        state: present
+        
+    - name: Copy Vault configuration
+      copy:
+        src: ../../vault/vault-config.hcl
+        dest: "{{ vault_config_dir }}/vault.hcl"
+        owner: "{{ vault_user }}"
+        group: "{{ vault_group }}"
+        mode: '0640'
+        
+    - name: Create Vault systemd service
+      copy:
+        dest: /etc/systemd/system/vault.service
+        content: |
+          [Unit]
+          Description=HashiCorp Vault
+          Documentation=https://www.vaultproject.io/docs/
+          Requires=network-online.target
+          After=network-online.target
+          ConditionFileNotEmpty={{ vault_config_dir }}/vault.hcl
+
+          [Service]
+          User={{ vault_user }}
+          Group={{ vault_group }}
+          ProtectSystem=full
+          ProtectHome=read-only
+          PrivateTmp=yes
+          PrivateDevices=yes
+          SecureBits=keep-caps
+          AmbientCapabilities=CAP_IPC_LOCK
+          Capabilities=CAP_IPC_LOCK+ep
+          CapabilityBoundingSet=CAP_SYSLOG CAP_IPC_LOCK
+          NoNewPrivileges=yes
+          ExecStart=/usr/local/bin/vault server -config={{ vault_config_dir }}/vault.hcl
+          ExecReload=/bin/kill --signal HUP $MAINPID
+          KillMode=process
+          KillSignal=SIGINT
+          Restart=on-failure
+          RestartSec=5
+          TimeoutStopSec=30
+          LimitNOFILE=65536
+          LimitMEMLOCK=infinity
+
+          [Install]
+          WantedBy=multi-user.target
+        mode: '0644'
+        
+    - name: Reload systemd
+      systemd:
+        daemon_reload: yes
+        
+    - name: Enable and start Vault service
+      service:
+        name: vault
+        enabled: yes
+        state: started
+        
+    - name: Wait for Vault to be ready
+      wait_for:
+        port: 8200
+        delay: 5
+        timeout: 60
+        
+    - name: Display Vault status
+      command: vault status
+      environment:
+        VAULT_ADDR: http://127.0.0.1:8200
+      register: vault_status
+      failed_when: false
+      changed_when: false
+      
+    - name: Show Vault status
+      debug:
+        var: vault_status.stdout_lines
+        
+    - name: Display initialization message
+      debug:
+        msg: |
+          Vault has been installed and started.
+          
+          To initialize Vault:
+          1. Set VAULT_ADDR: export VAULT_ADDR='http://{{ ansible_default_ipv4.address }}:8200'
+          2. Initialize: vault operator init
+          3. Save the unseal keys and root token securely!
+          4. Unseal: vault operator unseal (use 3 different unseal keys)
+          5. Login: vault login (use root token)
+          
+          For production, configure TLS and use auto-unseal with cloud KMS.
