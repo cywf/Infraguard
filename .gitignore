@@ -1,0 +1,79 @@
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ansible
+*.retry
+ansible.log
+.ansible/
+/ansible/inventory/hosts
+
+# Packer
+packer_cache/
+*.box
+
+# Vagrant
+.vagrant/
+*.log
+
+# Cloud provider credentials
+credentials
+*.pem
+*.key
+*.crt
+*_rsa
+*_rsa.pub
+service-account*.json
+
+# Secrets
+secrets/
+*.secret
+.env
+.env.*
+
+# OS specific
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.iml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Logs
+*.log
+logs/
+log/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+
+# SSH
+known_hosts

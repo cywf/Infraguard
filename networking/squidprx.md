@@ -65,6 +65,6 @@ service squid restart
 
 clear
 
-change
-htpasswd -b -c /etc/squid/squid_passwd $USERNAME $PASSWORD
+# Change password if needed:
+# htpasswd -b -c /etc/squid/squid_passwd $USERNAME $PASSWORD
 ```

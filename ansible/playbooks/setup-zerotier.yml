@@ -1,0 +1,53 @@
+---
+# ZeroTier Setup Playbook
+# Installs and configures ZeroTier VPN on target systems
+
+- name: Setup ZeroTier
+  hosts: zerotier_nodes
+  become: yes
+  
+  vars:
+    zerotier_network_id: ""  # Set your ZeroTier network ID
+    
+  tasks:
+    - name: Install curl
+      apt:
+        name: curl
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+      
+    - name: Install ZeroTier
+      shell: curl -s https://install.zerotier.com | bash
+      args:
+        creates: /usr/sbin/zerotier-one
+        
+    - name: Start and enable ZeroTier service
+      service:
+        name: zerotier-one
+        state: started
+        enabled: yes
+        
+    - name: Join ZeroTier network
+      command: zerotier-cli join {{ zerotier_network_id }}
+      when: zerotier_network_id != ""
+      register: join_result
+      changed_when: "'200 join OK' in join_result.stdout"
+      
+    - name: Get ZeroTier status
+      command: zerotier-cli status
+      register: zt_status
+      changed_when: false
+      
+    - name: Display ZeroTier status
+      debug:
+        var: zt_status.stdout
+        
+    - name: Get ZeroTier node ID
+      command: zerotier-cli info
+      register: zt_info
+      changed_when: false
+      
+    - name: Display ZeroTier node info
+      debug:
+        msg: "ZeroTier Node ID: {{ zt_info.stdout.split()[2] }}"
