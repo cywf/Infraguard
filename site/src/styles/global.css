@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Skip to content link */
+.skip-to-content {
+  @apply fixed top-0 left-0 z-50 p-4 bg-primary text-primary-content;
+  @apply transform -translate-y-full focus:translate-y-0;
+  @apply transition-transform duration-200;
+}
+
+/* Smooth scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Code preview styles */
+.code-preview {
+  @apply bg-base-200 rounded-lg overflow-hidden;
+}
+
+.code-preview pre {
+  @apply p-4 overflow-x-auto;
+}
+
+/* Skeleton loader */
+.skeleton {
+  @apply animate-pulse bg-base-300 rounded;
+}
+
+/* Mermaid diagrams */
+.mermaid {
+  @apply flex justify-center items-center min-h-[400px];
+}

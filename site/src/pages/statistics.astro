@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Charts from '../components/Charts';
+---
+
+<Layout title="Infraguard - Statistics" currentPath="/statistics">
+  <div class="container mx-auto px-4 py-8 max-w-7xl">
+    <!-- Breadcrumbs -->
+    <div class="text-sm breadcrumbs mb-6">
+      <ul>
+        <li><a href={`${import.meta.env.BASE_URL}/`}>Home</a></li>
+        <li>Statistics</li>
+      </ul>
+    </div>
+
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold mb-4">Repository Statistics</h1>
+      <p class="text-lg opacity-80">
+        Insights into repository activity, language usage, and community engagement.
+      </p>
+    </div>
+
+    <!-- Charts Component -->
+    <Charts client:load />
+
+    <!-- Info -->
+    <div class="alert alert-info mt-8">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <div>
+        <h3 class="font-bold">Data Source</h3>
+        <div class="text-sm">
+          Statistics are generated during CI builds and updated with each deployment.
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

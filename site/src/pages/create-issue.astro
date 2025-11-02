@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Infraguard - Create Issue" currentPath="/create-issue">
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <div class="text-sm breadcrumbs mb-6">
+      <ul>
+        <li><a href={`${import.meta.env.BASE_URL}/`}>Home</a></li>
+        <li>Create Issue</li>
+      </ul>
+    </div>
+
+    <div class="mb-8 text-center">
+      <h1 class="text-4xl font-bold mb-4">Create an Issue</h1>
+      <p class="text-lg opacity-80">
+        Found a bug or have a feature request? Let us know!
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body items-center text-center">
+          <div class="text-5xl mb-4">🐛</div>
+          <h2 class="card-title">Bug Report</h2>
+          <p class="text-sm opacity-70 mb-4">
+            Report a problem or unexpected behavior
+          </p>
+          <div class="card-actions">
+            <a 
+              href="https://github.com/cywf/Infraguard/issues/new?labels=bug&template=bug_report.md&title=%5BBUG%5D%3A+"
+              class="btn btn-error btn-sm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Report Bug
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body items-center text-center">
+          <div class="text-5xl mb-4">✨</div>
+          <h2 class="card-title">Feature Request</h2>
+          <p class="text-sm opacity-70 mb-4">
+            Suggest a new feature or enhancement
+          </p>
+          <div class="card-actions">
+            <a 
+              href="https://github.com/cywf/Infraguard/issues/new?labels=enhancement&template=feature_request.md&title=%5BFEATURE%5D%3A+"
+              class="btn btn-success btn-sm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Request Feature
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body items-center text-center">
+          <div class="text-5xl mb-4">📚</div>
+          <h2 class="card-title">Documentation</h2>
+          <p class="text-sm opacity-70 mb-4">
+            Improve or fix documentation
+          </p>
+          <div class="card-actions">
+            <a 
+              href="https://github.com/cywf/Infraguard/issues/new?labels=documentation&template=documentation.md&title=%5BDOCS%5D%3A+"
+              class="btn btn-info btn-sm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Update Docs
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">General Issue</h2>
+        <p class="mb-4">
+          Not sure which template to use? Start with a blank issue or browse existing issue templates.
+        </p>
+        <div class="card-actions">
+          <a 
+            href="https://github.com/cywf/Infraguard/issues/new/choose"
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Choose Template
+          </a>
+          <a 
+            href="https://github.com/cywf/Infraguard/issues/new"
+            class="btn btn-outline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Blank Issue
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info mt-8">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <div>
+        <h3 class="font-bold">Before Creating an Issue</h3>
+        <div class="text-sm">
+          <ul class="list-disc list-inside">
+            <li>Search existing issues to avoid duplicates</li>
+            <li>Provide as much detail as possible</li>
+            <li>Include steps to reproduce for bugs</li>
+            <li>Be respectful and constructive</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

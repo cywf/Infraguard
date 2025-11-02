@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const benchmarks = [
+  {
+    title: 'CIS Benchmarks',
+    description: 'Center for Internet Security security configuration benchmarks',
+    links: [
+      { name: 'CIS Controls', url: 'https://www.cisecurity.org/controls' },
+      { name: 'CIS Benchmarks', url: 'https://www.cisecurity.org/cis-benchmarks' },
+    ],
+  },
+  {
+    title: 'SCAP Content',
+    description: 'Security Content Automation Protocol compliance content',
+    links: [
+      { name: 'SCAP Overview', url: 'https://csrc.nist.gov/projects/security-content-automation-protocol' },
+      { name: 'OpenSCAP', url: 'https://www.open-scap.org/' },
+    ],
+  },
+  {
+    title: 'NIST Guidelines',
+    description: 'National Institute of Standards and Technology security frameworks',
+    links: [
+      { name: 'NIST Cybersecurity Framework', url: 'https://www.nist.gov/cyberframework' },
+      { name: 'NIST SP 800 Series', url: 'https://csrc.nist.gov/publications/sp800' },
+    ],
+  },
+  {
+    title: 'DISA STIGs',
+    description: 'Defense Information Systems Agency Security Technical Implementation Guides',
+    links: [
+      { name: 'DISA STIGs', url: 'https://public.cyber.mil/stigs/' },
+    ],
+  },
+];
+---
+
+<Layout title="Infraguard - Benchmarks" currentPath="/benchmarks">
+  <div class="container mx-auto px-4 py-8 max-w-7xl">
+    <div class="text-sm breadcrumbs mb-6">
+      <ul>
+        <li><a href={`${import.meta.env.BASE_URL}/`}>Home</a></li>
+        <li>Benchmarks</li>
+      </ul>
+    </div>
+
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold mb-4">Security Benchmarks</h1>
+      <p class="text-lg opacity-80">
+        Reference links to industry-standard security benchmarks and hardening guides.
+      </p>
+    </div>
+
+    <div class="alert alert-warning mb-8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+      <div>
+        <h3 class="font-bold">Educational Reference Only</h3>
+        <div class="text-sm">
+          These benchmarks are provided for educational purposes. Always review and test configurations in 
+          non-production environments before deployment. Use responsibly and in compliance with all applicable laws.
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {benchmarks.map((benchmark) => (
+        <div class="card bg-base-200 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title text-primary">{benchmark.title}</h2>
+            <p class="text-sm opacity-70 mb-4">{benchmark.description}</p>
+            <div class="space-y-2">
+              {benchmark.links.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-sm btn-outline w-full justify-between"
+                >
+                  {link.name}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="card bg-base-200 shadow-xl mt-8">
+      <div class="card-body">
+        <h2 class="card-title">Additional Resources</h2>
+        <ul class="list-disc list-inside space-y-2 opacity-80">
+          <li>Always verify benchmark versions and applicability to your systems</li>
+          <li>Test hardening configurations in isolated environments first</li>
+          <li>Document any deviations from benchmarks for compliance audits</li>
+          <li>Regularly review and update security configurations</li>
+          <li>Consider operational impact before applying strict security controls</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -5,6 +5,12 @@
 
 _Repo containing automated server provisioning and configuration scripts, intended to reduce manual system administration tasks, and securing your infrastructure from launch._
 
+## 🌐 Live Site
+
+**[View the Interactive Documentation Site →](https://cywf.github.io/Infraguard/)**
+
+Explore our comprehensive documentation, browse infrastructure artifacts, and view repository insights through our interactive GitHub Pages site built with Astro + React + TailwindCSS.
+
 ```
             ,
        ,   |\ ,__
@@ -93,17 +99,33 @@ Infraguard/
 ├── vault/            # Secrets management setup
 ├── cloudinit/        # Cloud-init configurations
 ├── networking/       # Network configurations
-└── stacks/           # Application stacks
+├── stacks/           # Application stacks
+└── site/             # GitHub Pages site (Astro + React)
 ```
 
 ### Documentation
 
+- **[🌐 Interactive Site](https://cywf.github.io/Infraguard/)** - Browse the full documentation site
 - **[Setup Guide](SETUP.md)** - Installation and configuration
 - **[Contributing Guide](CONTRIBUTING.md)** - How to contribute
 - **[Ansible Documentation](ansible/README.md)** - Automation playbooks
 - **[Terraform Documentation](terraform/README.md)** - Infrastructure configs
 - **[Vault Documentation](vault/README.md)** - Secrets management
 - **[Nomad Documentation](nomad/README.md)** - Container orchestration
+
+### 📊 Site Features
+
+The [GitHub Pages site](https://cywf.github.io/Infraguard/) provides:
+
+- **Explorer** - Browse Ansible playbooks, Terraform modules, and infrastructure artifacts
+- **Statistics** - Repository insights with language breakdown and commit activity
+- **Discussions** - Community discussions and announcements
+- **Development Board** - Track project progress and ongoing work
+- **Visualizer** - Interactive Mermaid diagrams of system architecture
+- **Docs** - Comprehensive guides for all components
+- **Benchmarks** - References to industry security standards (CIS, SCAP, NIST, DISA STIGs)
+
+The site is automatically generated from the repository during CI builds using best-effort parsing of infrastructure files.
 
 ---
 
