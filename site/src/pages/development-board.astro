@@ -61,34 +61,80 @@ import Layout from '../layouts/Layout.astro';
           done: data.done || []
         };
         
-        container.innerHTML = Object.entries(lanes).map(([status, items]: [string, any]) => `
-          <div class="card bg-base-200 shadow-xl">
-            <div class="card-body">
-              <h2 class="card-title capitalize">
-                ${status}
-                <span class="badge badge-primary">${items.length}</span>
-              </h2>
-              <div class="space-y-2 max-h-96 overflow-y-auto">
-                ${items.length === 0 ? `
-                  <p class="text-sm opacity-60">No items in this column</p>
-                ` : items.map((item: any) => `
-                  <div class="card bg-base-300 shadow">
-                    <div class="card-body p-3">
-                      <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="link link-hover text-sm">
-                        ${item.title}
-                      </a>
-                      <div class="flex gap-2 mt-1">
-                        ${item.labels?.map((label: string) => `
-                          <span class="badge badge-xs">${label}</span>
-                        `).join('') || ''}
-                      </div>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          </div>
-        `).join('');
+        // Clear container first
+        container.innerHTML = '';
+        
+        // Use DOM API to safely create elements
+        Object.entries(lanes).forEach(([status, items]: [string, any]) => {
+          const laneCard = document.createElement('div');
+          laneCard.className = 'card bg-base-200 shadow-xl';
+          
+          const cardBody = document.createElement('div');
+          cardBody.className = 'card-body';
+          
+          // Lane title
+          const titleH2 = document.createElement('h2');
+          titleH2.className = 'card-title capitalize';
+          titleH2.textContent = status;
+          
+          const badge = document.createElement('span');
+          badge.className = 'badge badge-primary';
+          badge.textContent = items.length.toString();
+          
+          titleH2.appendChild(badge);
+          cardBody.appendChild(titleH2);
+          
+          // Items container
+          const itemsDiv = document.createElement('div');
+          itemsDiv.className = 'space-y-2 max-h-96 overflow-y-auto';
+          
+          if (items.length === 0) {
+            const emptyP = document.createElement('p');
+            emptyP.className = 'text-sm opacity-60';
+            emptyP.textContent = 'No items in this column';
+            itemsDiv.appendChild(emptyP);
+          } else {
+            items.forEach((item: any) => {
+              const itemCard = document.createElement('div');
+              itemCard.className = 'card bg-base-300 shadow';
+              
+              const itemBody = document.createElement('div');
+              itemBody.className = 'card-body p-3';
+              
+              // Item title link
+              const itemLink = document.createElement('a');
+              itemLink.href = item.url || '#';
+              itemLink.target = '_blank';
+              itemLink.rel = 'noopener noreferrer';
+              itemLink.className = 'link link-hover text-sm';
+              itemLink.textContent = item.title || 'Untitled';
+              
+              itemBody.appendChild(itemLink);
+              
+              // Labels
+              if (item.labels && item.labels.length > 0) {
+                const labelsDiv = document.createElement('div');
+                labelsDiv.className = 'flex gap-2 mt-1';
+                
+                item.labels.forEach((label: string) => {
+                  const labelSpan = document.createElement('span');
+                  labelSpan.className = 'badge badge-xs';
+                  labelSpan.textContent = label;
+                  labelsDiv.appendChild(labelSpan);
+                });
+                
+                itemBody.appendChild(labelsDiv);
+              }
+              
+              itemCard.appendChild(itemBody);
+              itemsDiv.appendChild(itemCard);
+            });
+          }
+          
+          cardBody.appendChild(itemsDiv);
+          laneCard.appendChild(cardBody);
+          container.appendChild(laneCard);
+        });
       } catch (error) {
         console.error('Error loading dev board:', error);
         const container = document.getElementById('dev-board');

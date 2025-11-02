@@ -41,6 +41,13 @@ import Layout from '../layouts/Layout.astro';
   </div>
 
   <script>
+    // HTML escape function to prevent XSS
+    function escapeHtml(text: string): string {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
     async function loadDiscussions() {
       try {
         const baseUrl = import.meta.env.BASE_URL;
@@ -67,27 +74,66 @@ import Layout from '../layouts/Layout.astro';
           return;
         }
         
-        container.innerHTML = discussions.map((discussion: any) => `
-          <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
-            <div class="card-body">
-              <div class="flex items-start justify-between">
-                <div class="flex-1">
-                  <h3 class="card-title text-lg">
-                    <a href="${discussion.url}" target="_blank" rel="noopener noreferrer" class="link link-hover">
-                      ${discussion.title}
-                    </a>
-                  </h3>
-                  <p class="text-sm opacity-70 mt-2">${discussion.category || 'General'}</p>
-                  <div class="flex gap-4 mt-2 text-sm opacity-60">
-                    <span>👤 ${discussion.author || 'Unknown'}</span>
-                    <span>💬 ${discussion.comments || 0} comments</span>
-                    <span>📅 ${new Date(discussion.createdAt).toLocaleDateString()}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        `).join('');
+        // Clear container first
+        container.innerHTML = '';
+        
+        // Use DOM API to safely create elements
+        discussions.forEach((discussion: any) => {
+          const card = document.createElement('div');
+          card.className = 'card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow';
+          
+          const cardBody = document.createElement('div');
+          cardBody.className = 'card-body';
+          
+          const flexContainer = document.createElement('div');
+          flexContainer.className = 'flex items-start justify-between';
+          
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'flex-1';
+          
+          // Title section
+          const titleH3 = document.createElement('h3');
+          titleH3.className = 'card-title text-lg';
+          
+          const titleLink = document.createElement('a');
+          titleLink.href = discussion.url || '#';
+          titleLink.target = '_blank';
+          titleLink.rel = 'noopener noreferrer';
+          titleLink.className = 'link link-hover';
+          titleLink.textContent = discussion.title || 'Untitled';
+          
+          titleH3.appendChild(titleLink);
+          contentDiv.appendChild(titleH3);
+          
+          // Category
+          const categoryP = document.createElement('p');
+          categoryP.className = 'text-sm opacity-70 mt-2';
+          categoryP.textContent = discussion.category || 'General';
+          contentDiv.appendChild(categoryP);
+          
+          // Meta info
+          const metaDiv = document.createElement('div');
+          metaDiv.className = 'flex gap-4 mt-2 text-sm opacity-60';
+          
+          const authorSpan = document.createElement('span');
+          authorSpan.textContent = `👤 ${discussion.author || 'Unknown'}`;
+          
+          const commentsSpan = document.createElement('span');
+          commentsSpan.textContent = `💬 ${discussion.comments || 0} comments`;
+          
+          const dateSpan = document.createElement('span');
+          dateSpan.textContent = `📅 ${new Date(discussion.createdAt).toLocaleDateString()}`;
+          
+          metaDiv.appendChild(authorSpan);
+          metaDiv.appendChild(commentsSpan);
+          metaDiv.appendChild(dateSpan);
+          
+          contentDiv.appendChild(metaDiv);
+          flexContainer.appendChild(contentDiv);
+          cardBody.appendChild(flexContainer);
+          card.appendChild(cardBody);
+          container.appendChild(card);
+        });
       } catch (error) {
         console.error('Error loading discussions:', error);
         const container = document.getElementById('discussions-list');
