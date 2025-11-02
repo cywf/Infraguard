@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Infraguard - Development Board" currentPath="/development-board">
+  <div class="container mx-auto px-4 py-8 max-w-7xl">
+    <div class="text-sm breadcrumbs mb-6">
+      <ul>
+        <li><a href={`${import.meta.env.BASE_URL}/`}>Home</a></li>
+        <li>Development Board</li>
+      </ul>
+    </div>
+
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold mb-4">Development Board</h1>
+      <p class="text-lg opacity-80">
+        Track project progress and ongoing development work.
+      </p>
+    </div>
+
+    <div id="dev-board" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="skeleton h-64 w-full"></div>
+      <div class="skeleton h-64 w-full"></div>
+      <div class="skeleton h-64 w-full"></div>
+    </div>
+
+    <div class="card bg-base-200 shadow-xl mt-8">
+      <div class="card-body">
+        <h2 class="card-title">Contribute</h2>
+        <p>Want to help? Check out open issues and contribute to the project.</p>
+        <div class="card-actions">
+          <a href="https://github.com/cywf/Infraguard/issues" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            View All Issues
+          </a>
+          <a href={`${import.meta.env.BASE_URL}/create-issue`} class="btn btn-outline">
+            Create New Issue
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function loadDevBoard() {
+      try {
+        const baseUrl = import.meta.env.BASE_URL;
+        const response = await fetch(`${baseUrl}/data/projects.json`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to load project data');
+        }
+        
+        const data = await response.json();
+        const container = document.getElementById('dev-board');
+        
+        if (!container) return;
+        
+        const lanes = data.lanes || {
+          todo: data.todo || [],
+          doing: data.doing || [],
+          done: data.done || []
+        };
+        
+        // Clear container first
+        container.innerHTML = '';
+        
+        // Use DOM API to safely create elements
+        Object.entries(lanes).forEach(([status, items]: [string, any]) => {
+          const laneCard = document.createElement('div');
+          laneCard.className = 'card bg-base-200 shadow-xl';
+          
+          const cardBody = document.createElement('div');
+          cardBody.className = 'card-body';
+          
+          // Lane title
+          const titleH2 = document.createElement('h2');
+          titleH2.className = 'card-title capitalize';
+          titleH2.textContent = status;
+          
+          const badge = document.createElement('span');
+          badge.className = 'badge badge-primary';
+          badge.textContent = items.length.toString();
+          
+          titleH2.appendChild(badge);
+          cardBody.appendChild(titleH2);
+          
+          // Items container
+          const itemsDiv = document.createElement('div');
+          itemsDiv.className = 'space-y-2 max-h-96 overflow-y-auto';
+          
+          if (items.length === 0) {
+            const emptyP = document.createElement('p');
+            emptyP.className = 'text-sm opacity-60';
+            emptyP.textContent = 'No items in this column';
+            itemsDiv.appendChild(emptyP);
+          } else {
+            items.forEach((item: any) => {
+              const itemCard = document.createElement('div');
+              itemCard.className = 'card bg-base-300 shadow';
+              
+              const itemBody = document.createElement('div');
+              itemBody.className = 'card-body p-3';
+              
+              // Item title link
+              const itemLink = document.createElement('a');
+              itemLink.href = item.url || '#';
+              itemLink.target = '_blank';
+              itemLink.rel = 'noopener noreferrer';
+              itemLink.className = 'link link-hover text-sm';
+              itemLink.textContent = item.title || 'Untitled';
+              
+              itemBody.appendChild(itemLink);
+              
+              // Labels
+              if (item.labels && item.labels.length > 0) {
+                const labelsDiv = document.createElement('div');
+                labelsDiv.className = 'flex gap-2 mt-1';
+                
+                item.labels.forEach((label: string) => {
+                  const labelSpan = document.createElement('span');
+                  labelSpan.className = 'badge badge-xs';
+                  labelSpan.textContent = label;
+                  labelsDiv.appendChild(labelSpan);
+                });
+                
+                itemBody.appendChild(labelsDiv);
+              }
+              
+              itemCard.appendChild(itemBody);
+              itemsDiv.appendChild(itemCard);
+            });
+          }
+          
+          cardBody.appendChild(itemsDiv);
+          laneCard.appendChild(cardBody);
+          container.appendChild(laneCard);
+        });
+      } catch (error) {
+        console.error('Error loading dev board:', error);
+        const container = document.getElementById('dev-board');
+        if (container) {
+          container.innerHTML = `
+            <div class="col-span-3">
+              <div class="alert alert-warning">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <span>Unable to load development board. Please visit GitHub directly.</span>
+              </div>
+            </div>
+          `;
+        }
+      }
+    }
+    
+    loadDevBoard();
+  </script>
+</Layout>

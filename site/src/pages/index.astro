@@ -1,0 +1,155 @@
+---
+import Layout from '../layouts/Layout.astro';
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<Layout title="Infraguard - Home" currentPath="/">
+  <div class="container mx-auto px-4 py-8 max-w-7xl">
+    <!-- Hero Section -->
+    <div class="hero min-h-[50vh] bg-base-200 rounded-lg mb-8">
+      <div class="hero-content text-center">
+        <div class="max-w-3xl">
+          <h1 class="text-5xl font-bold mb-4">
+            <span class="text-primary">INFRAGUARD</span>
+          </h1>
+          <p class="text-xl mb-2 font-mono">The ever-vigilant Guardian</p>
+          <p class="text-lg opacity-80 mb-6">
+            Automated server provisioning and configuration for securing your infrastructure from launch
+          </p>
+          <div class="flex gap-4 justify-center flex-wrap">
+            <a href={`${baseUrl}/explorer`} class="btn btn-primary">
+              Explore Playbooks
+            </a>
+            <a href={`${baseUrl}/docs`} class="btn btn-outline">
+              Read Documentation
+            </a>
+            <a href="https://github.com/cywf/Infraguard" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mission Statement -->
+    <div class="card bg-base-200 shadow-xl mb-8">
+      <div class="card-body">
+        <h2 class="card-title text-2xl text-primary">Mission</h2>
+        <p class="text-lg">
+          To build an Offensive, Proactive, and Defensive Automated Provisioning Platform for deploying 
+          Cyber Incident Response Security Operations Infrastructure. Ensuring the Confidentiality, 
+          Integrity, and Assurance (CIA) of critical infrastructure.
+        </p>
+      </div>
+    </div>
+
+    <!-- Heimda1 Concept -->
+    <div class="card bg-base-200 shadow-xl mb-8">
+      <div class="card-body">
+        <h2 class="card-title text-2xl text-secondary">Heimda1</h2>
+        <p class="text-lg">
+          An A.I.-driven, Red Team-inspired strategic defensive security measure that detects breaches, 
+          hunts the web for stolen data, and works to retrieve or destroy it. A self-improving security 
+          A.I. that protects the digital safety of those who cannot.
+        </p>
+      </div>
+    </div>
+
+    <!-- Key Features Grid -->
+    <h2 class="text-3xl font-bold mb-6 text-center">Key Capabilities</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <!-- Features -->
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h3 class="card-title text-accent">Infrastructure Hardening</h3>
+          <p>Automated hardening with Terraform and Vagrant for secure infrastructure deployment.</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h3 class="card-title text-accent">Advanced Networking</h3>
+          <p>OpenWRT and ZeroTier configurations for secure, distributed network architectures.</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h3 class="card-title text-accent">Configuration Automation</h3>
+          <p>Packer image building and Ansible playbooks for consistent, repeatable deployments.</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h3 class="card-title text-accent">Secrets Management</h3>
+          <p>HashiCorp Vault integration for secure secrets storage and distribution.</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h3 class="card-title text-accent">Container Orchestration</h3>
+          <p>Nomad configurations for flexible container and application orchestration.</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h3 class="card-title text-accent">Red Team Techniques</h3>
+          <p>Defensive strategies inspired by offensive security tactics and procedures.</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h3 class="card-title text-accent">Deep Forensics</h3>
+          <p>Advanced forensics tools and attack surface mapping capabilities.</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h3 class="card-title text-accent">Active Reconnaissance</h3>
+          <p>Silent reconnaissance and intelligence gathering tools.</p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
+        <div class="card-body">
+          <h3 class="card-title text-accent">Anti-Forensics</h3>
+          <p>Protective measures against forensic analysis and data recovery.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-2xl mb-4">Quick Links</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <a href={`${baseUrl}/docs`} class="btn btn-outline btn-primary">
+            📖 Setup Guide
+          </a>
+          <a href="https://github.com/cywf/Infraguard/issues" class="btn btn-outline btn-secondary" target="_blank" rel="noopener noreferrer">
+            🐛 Report Issues
+          </a>
+          <a href="https://github.com/cywf/Infraguard/discussions" class="btn btn-outline btn-accent" target="_blank" rel="noopener noreferrer">
+            💬 Discussions
+          </a>
+          <a href="https://github.com/cywf/Infraguard/blob/main/LICENSE" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+            📜 License
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- For Entertainment Purposes Notice -->
+    <div class="alert alert-warning mt-8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+      <span>For educational and entertainment purposes only. Use responsibly and ethically.</span>
+    </div>
+  </div>
+</Layout>

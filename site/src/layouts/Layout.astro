@@ -1,0 +1,115 @@
+---
+import '../styles/global.css';
+import ThemeSwitcher from '../components/ThemeSwitcher';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const { title, description = 'Infraguard - Automated security infrastructure toolkit', currentPath = '/' } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+
+const navItems = [
+  { name: 'Home', path: '/' },
+  { name: 'Explorer', path: '/explorer' },
+  { name: 'Statistics', path: '/statistics' },
+  { name: 'Discussions', path: '/discussions' },
+  { name: 'Dev Board', path: '/development-board' },
+  { name: 'Create Issue', path: '/create-issue' },
+  { name: 'Docs', path: '/docs' },
+  { name: 'Visualizer', path: '/visualizer' },
+];
+
+const currentYear = new Date().getFullYear();
+const deployTime = new Date().toISOString();
+const commitSha = process.env.GITHUB_SHA?.substring(0, 7) || 'local';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}/favicon.svg`} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- Skip to content link -->
+    <a href="#main-content" class="skip-to-content">
+      Skip to content
+    </a>
+
+    <!-- Navbar -->
+    <div class="navbar bg-base-200 shadow-lg sticky top-0 z-40">
+      <div class="navbar-start">
+        <div class="dropdown">
+          <button tabindex="0" class="btn btn-ghost lg:hidden" aria-label="Open menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+          </button>
+          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52">
+            {navItems.map((item) => (
+              <li>
+                <a 
+                  href={`${baseUrl}${item.path}`}
+                  class={currentPath === item.path ? 'active' : ''}
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <a href={`${baseUrl}/`} class="btn btn-ghost text-xl">
+          <span class="font-mono">INFRAGUARD</span>
+        </a>
+      </div>
+      <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal px-1">
+          {navItems.map((item) => (
+            <li>
+              <a 
+                href={`${baseUrl}${item.path}`}
+                class={currentPath === item.path ? 'active' : ''}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="navbar-end">
+        <ThemeSwitcher client:load />
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="min-h-screen">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-10 bg-base-200 text-base-content">
+      <div class="grid grid-flow-col gap-4">
+        <a href="https://github.com/cywf/Infraguard/blob/main/LICENSE" class="link link-hover" target="_blank" rel="noopener noreferrer">
+          MIT License
+        </a>
+        <a href="https://github.com/cywf/Infraguard" class="link link-hover" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+        <a href="https://github.com/cywf/Infraguard/issues" class="link link-hover" target="_blank" rel="noopener noreferrer">
+          Issues
+        </a>
+      </div>
+      <div class="text-sm opacity-70">
+        <p>Last deployed: {deployTime.split('T')[0]} | Commit: {commitSha}</p>
+        <p>© {currentYear} Infraguard - All rights reserved</p>
+      </div>
+    </footer>
+  </body>
+</html>

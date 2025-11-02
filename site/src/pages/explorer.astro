@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ExplorerList from '../components/ExplorerList';
+---
+
+<Layout title="Infraguard - Explorer" currentPath="/explorer">
+  <div class="container mx-auto px-4 py-8 max-w-7xl">
+    <!-- Breadcrumbs -->
+    <div class="text-sm breadcrumbs mb-6">
+      <ul>
+        <li><a href={`${import.meta.env.BASE_URL}/`}>Home</a></li>
+        <li>Explorer</li>
+      </ul>
+    </div>
+
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold mb-4">Playbooks & Modules Explorer</h1>
+      <p class="text-lg opacity-80">
+        Browse Ansible playbooks, Terraform modules, and infrastructure artifacts. 
+        All artifacts are read-only and link to their source on GitHub.
+      </p>
+    </div>
+
+    <!-- Explorer Component -->
+    <ExplorerList client:load />
+
+    <!-- Info Alert -->
+    <div class="alert alert-info mt-8">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <div>
+        <h3 class="font-bold">About the Explorer</h3>
+        <div class="text-sm">
+          Indexes are generated during CI builds via best-effort parsing. Click any card to view the source on GitHub.
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
